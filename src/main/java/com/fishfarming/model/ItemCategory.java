@@ -2,48 +2,35 @@ package com.fishfarming.model;
 
 import java.util.List;
 
+import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@Entity
+@Table
 public class ItemCategory {
-	
-		private String categoryId;
-		
-		private String categoryName;
-	
-		private String categoryImageUrl;
-		
-		private List<ItemSubCategory> subCategories;
 
-		public String getCategoryId() {
-			return categoryId;
-		}
+	@Column
+	@Id
+	private String categoryId;
+	@Column
+	private String categoryName;
+	@Column
+	private String categoryImageUrl;
 
-		public void setCategoryId(String categoryId) {
-			this.categoryId = categoryId;
-		}
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="categoryId")
+	@Fetch(FetchMode.JOIN)
+	private List<ItemSubCategory> subCategories;
 
-		public String getCategoryName() {
-			return categoryName;
-		}
-
-		public void setCategoryName(String categoryName) {
-			this.categoryName = categoryName;
-		}
-
-		public String getCategoryImageUrl() {
-			return categoryImageUrl;
-		}
-
-		public void setCategoryImageUrl(String categoryImageUrl) {
-			this.categoryImageUrl = categoryImageUrl;
-		}
-
-		public List<ItemSubCategory> getSubCategories() {
-			return subCategories;
-		}
-
-		public void setSubCategories(List<ItemSubCategory> subCategories) {
-			this.subCategories = subCategories;
-		}
-		
-		
 }

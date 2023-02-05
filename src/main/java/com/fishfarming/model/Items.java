@@ -1,77 +1,43 @@
 package com.fishfarming.model;
 
-public class Items {
-	
-	private String categoryId;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.util.Objects;
+
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table
+public class Items {
+
+	@Transient
+	private String categoryId;
+	@Transient
 	private String subCategoryId;
-	
+	@Id
+	@Column
 	private String itemId;
-	
+	@Column
 	private String itemName;
-	
+	@Column
+	private String imageUrl;
+	@Column
 	private float price;
-	
+	@Column
 	private String description;
-	
+	@Column
 	private String quantity;
 
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getSubCategoryId() {
-		return subCategoryId;
-	}
-
-	public void setSubCategoryId(String subCategoryId) {
-		this.subCategoryId = subCategoryId;
-	}
-
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
-
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
-	}
-	
-	
 
 }

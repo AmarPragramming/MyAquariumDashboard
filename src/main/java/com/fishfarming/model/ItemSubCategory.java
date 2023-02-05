@@ -1,58 +1,59 @@
 package com.fishfarming.model;
 
 import java.util.List;
+import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@Component
+@Entity
+@Table
 public class ItemSubCategory {
 
+	@Transient
 	private String categoryId;
-	
+	@Id
+	@Column
 	private String subCategoryId;
-	
+	@Column
 	private String subCategoryName;
-
+	@Column
 	private String subCategoryImageUrl;
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "subCategoryId")
+	@Fetch(FetchMode.JOIN)
 	private List<Items> items;
 
-	public String getCategoryId() {
-		return categoryId;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ItemSubCategory that = (ItemSubCategory) o;
+		return subCategoryId.equals(that.subCategoryId);
 	}
 
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
+	@Override
+	public int hashCode() {
+		return Objects.hash(subCategoryId);
 	}
-
-	public String getSubCategoryId() {
-		return subCategoryId;
-	}
-
-	public void setSubCategoryId(String subCategoryId) {
-		this.subCategoryId = subCategoryId;
-	}
-
-	public String getSubCategoryName() {
-		return subCategoryName;
-	}
-
-	public void setSubCategoryName(String subCategoryName) {
-		this.subCategoryName = subCategoryName;
-	}
-
-	public String getSubCategoryImageUrl() {
-		return subCategoryImageUrl;
-	}
-
-	public void setSubCategoryImageUrl(String subCategoryImageUrl) {
-		this.subCategoryImageUrl = subCategoryImageUrl;
-	}
-
-	public List<Items> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Items> items) {
-		this.items = items;
-	}
-	
-	
 }
